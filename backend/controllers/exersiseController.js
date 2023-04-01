@@ -1,16 +1,23 @@
 const asyncHandler=require('express-async-handler')
+const Exersise=require('../models/exersiseModel')
+
 const getExersise=asyncHandler(async(req, res)=>{
-      res.status(200).json({ message: "get the exersises" });
+  const exersices=await Exersise.find()
+      res.status(200).json( exersices );
 
 })
 
 const postExersise = asyncHandler(async (req, res) => {
   console.log(req.body);
-  if (!req.body.text) {
+  if (!req.body.question && !req.body.answer) {
     res.status(400);
-    throw new Error("Plz add input of text field");
+    throw new Error("Plz add input of question and answer field");
   }
-  res.status(200).json({ message: "create exersises" });
+  const exersice = await Exersise.create({
+    question: req.body.question,
+    answer: req.body.answer,
+  });
+  res.status(200).json(exersice);
 })
 
 const updateExersise = asyncHandler(async (req, res) => {
