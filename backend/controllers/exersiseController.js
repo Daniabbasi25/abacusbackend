@@ -9,13 +9,13 @@ const getExersise=asyncHandler(async(req, res)=>{
 
 const postExersise = asyncHandler(async (req, res) => {
   console.log(req.body);
-  if (!req.body.question && !req.body.answer) {
+  if (!req.body.name && !req.body.description) {
     res.status(400);
     throw new Error("Plz add input of question and answer field");
   }
   const exersice = await Exersise.create({
-    question: req.body.question,
-    answer: req.body.answer,
+    name: req.body.name,
+    description: req.body.description,
   });
   res.status(200).json(exersice);
 })
