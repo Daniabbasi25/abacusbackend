@@ -7,6 +7,9 @@ const getExersise=asyncHandler(async(req, res)=>{
 
 })
 
+
+
+
 const postExersise = asyncHandler(async (req, res) => {
   console.log(req.body);
   if (!req.body.name && !req.body.description) {
