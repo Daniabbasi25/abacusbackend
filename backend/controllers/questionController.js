@@ -1,6 +1,14 @@
 const asyncHandler=require('express-async-handler')
 const Question=require('../models/questionModel')
 const getQuestions=asyncHandler(async(req,res)=>{
+  console.log("in question=", req.params.id)
+ const questions = await Question.find({
+   exercise_id: req.params.id
+ });
+ console.log(questions)
+ res.status(200).json(questions);
+})
+const getAllQuestions=asyncHandler(async(req,res)=>{
  const questions = await Question.find();
  res.status(200).json(questions);
 })
@@ -27,6 +35,7 @@ const postQuestion=asyncHandler(
     }
 )
 module.exports = {
- postQuestion,
- getQuestions
+  postQuestion,
+  getQuestions,
+  getAllQuestions,
 };
